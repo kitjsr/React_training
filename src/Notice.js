@@ -2,6 +2,9 @@ import React from "react";
 import Table from "react-bootstrap/Table";
 import Image from 'react-bootstrap/Image';
 import Moment from "react-moment";
+import { Link } from "react-router";
+import { Pencil, Trash } from 'react-bootstrap-icons';
+import './App.css';
 
 export const Notice = () => {
   const notices = [
@@ -157,7 +160,6 @@ export const Notice = () => {
       <h1>Notice</h1>
       <Table striped bordered hover>
         <thead>
-          
           <tr>
             <th>Sl.</th>
             <th>Title</th>
@@ -165,27 +167,25 @@ export const Notice = () => {
             <th>Home</th>
             <th>New</th>
             <th>Date</th>
+            <th>Edit</th>
+            <th>Delete</th>
           </tr>
         </thead>
-      <tbody>
-          {
-            notices.map((notice,index) => {
-              return(
-                <tr>
-                  <td>{index+1}</td>
-                  <td>{notice.title} {notice.new==1?<Image src="https://gpa.ac.in/new.gif" />:""}</td>
-                  <td><a href="https://gpa.ac.in/admin/uploads/{$notice.notice}">Notice</a></td>
-                  <td>{notice.home}</td>
-                  <td>{notice.new}</td>
-                  <td><Moment format="YYYY/MM/DD">{notice.date}</Moment></td>
-                </tr>
-              
-            )
-            }
-            )
-          }
-      </tbody>
+        <tbody>
+           
+           {
+            notices.map((notice,index)=>(
+              <tr key={index+1}>
+                <td>{index+1}</td>
+                <td>{notice.date}</td>
+                <td>{notice.title}</td>
+                <td><Link to={"https://gpa.ac.in/admin/uploads/" + notice.notice}>link</Link></td>
+              </tr>
+            ))
+           }
+        </tbody>
     </Table>
     </div>
   );
 };
+

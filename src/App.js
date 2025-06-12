@@ -8,6 +8,8 @@ import { Contact } from './Contact';
 import { Notice } from './Notice';
 import { Link, Route,Routes } from 'react-router';
 import { Home } from './Home';
+import { Form } from 'react-bootstrap';
+import { Forms } from './Forms';
 
 function App() {
   return (
@@ -19,16 +21,18 @@ function App() {
         <li><Link to="/about">About</Link></li>
         <li><Link to="/contact">Contact</Link></li>
         <li><Link to="/notice">Notice</Link></li>
+        <li><Link to="/forms">Form</Link></li>
       </ul>
       <Routes>
         <Route path=" " element={ <Home/> } />
         <Route path="/about" element={ <About/> } />
         <Route path="/contact" element={ <Contact/> } />
         <Route path="/notice" element={ <Notice/> } />
+        <Route path="/forms" element={ <Forms/> } />
         <Route path="/*" element={ <Home/> } />
       </Routes>
-      <Header></Header>
-      <Footer></Footer>
+      {/* <Header></Header>
+      <Footer></Footer> */}
     </div>
     
   );
