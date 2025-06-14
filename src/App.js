@@ -1,15 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
-import { Header } from './Header';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Footer } from './Footer';
 import { About } from './About';
 import { Contact } from './Contact';
 import { Notice } from './Notice';
 import { Link, Route,Routes } from 'react-router';
 import { Home } from './Home';
-import { Form } from 'react-bootstrap';
 import { Forms } from './Forms';
+import Formiks from './Formiks';
 
 function App() {
   return (
@@ -22,6 +20,7 @@ function App() {
         <li><Link to="/contact">Contact</Link></li>
         <li><Link to="/notice">Notice</Link></li>
         <li><Link to="/forms">Form</Link></li>
+        <li><Link to="/formiks">Formiks</Link></li>
       </ul>
       <Routes>
         <Route path=" " element={ <Home/> } />
@@ -29,6 +28,7 @@ function App() {
         <Route path="/contact" element={ <Contact/> } />
         <Route path="/notice" element={ <Notice/> } />
         <Route path="/forms" element={ <Forms/> } />
+        <Route path="/formiks" element={ <Formiks/> } />
         <Route path="/*" element={ <Home/> } />
       </Routes>
       {/* <Header></Header>

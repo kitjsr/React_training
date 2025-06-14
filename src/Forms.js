@@ -2,14 +2,15 @@ import React from 'react'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { Formik, Field, ErrorMessage } from 'formik';
- 
+ import InputGroup from 'react-bootstrap/InputGroup';
 
 
 export const Forms = () => {
   return (
     <div>
       <Formik
-       initialValues={{ email: '', password: '',}}
+       initialValues={{ email: '', password: '',firstName: '',
+         lastName: '',}}
        validate={values => {
          const errors = {};
          if (!values.email) {
@@ -21,21 +22,37 @@ export const Forms = () => {
          }
          if (!values.password) {
            errors.password = 'Required';
-         } else if (values.password.length > 8 && values.password.length < 20)
-        {
-           errors.password= 'Must be 20 characters or less';
-         }
+         }else if (
+  values.password.length >= 8 &&
+  values.password.length <= 20 &&
+  !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/.test(values.password)
+) {
+  errors.password = 'Password must include uppercase, lowercase, number, and special character';
+}
          return errors;
        }}
        onSubmit={(values, { setSubmitting }) => {
          setTimeout(() => {
            alert(JSON.stringify(values, null, 2));
            setSubmitting(false);
+           console.log(values);
          }, 400);
        }}
      >
-      {({ isSubmitting,values }) => (
+      {({ isSubmitting,values,errors, touched }) => (
             <Form>
+              
+    <InputGroup className="mb-3">
+      <InputGroup.Text>First and last name</InputGroup.Text>
+      <Form.Control aria-label="First name" />
+      
+           {errors.firstName && touched.firstName ? (
+             <div>{errors.firstName}</div>
+           ) : null}
+      <Form.Control aria-label="Last name" />
+      
+    </InputGroup>
+
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Email address</Form.Label>
         <Form.Control type="email" placeholder="Enter email" />
@@ -60,9 +77,6 @@ export const Forms = () => {
         name="password"
         id="inputPassword5"
         aria-describedby="passwordHelpBlock"
-        
-         onChange={formik.handleChange}
-         value={formik.values.lastName}
       />
       <Form.Text id="passwordHelpBlock" muted>
         Your password must be 8-20 characters long, contain letters and numbers,
@@ -75,7 +89,7 @@ export const Forms = () => {
             {`${values.toggle}`}
           </label>
       </Form.Group> */}
-      <Button variant="primary" type="submit" disabled={isSubmitting}>
+      <Button variant="primary" type="submit">
         Submit
       </Button>
     </Form>
